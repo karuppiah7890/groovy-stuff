@@ -156,3 +156,39 @@ $ groovydoc -d docOutput groovyDoc.groovy
 $ open docOutput/index-all.html
 $ open docOutput/index.html
 ```
+
+---
+
+I tried out the runtime groovy doc comments!
+
+```bash
+$ groovy runtimeGroovyDoc.groovy
+Caught: Assertion failed:
+
+assert Foo.class.groovydoc.content.contains('Some class groovydoc for Foo')
+                 |         |       |
+                 |         ''      false
+                 groovy.lang.groovydoc.Groovydoc$1@5c1bd44c (toString() == "")
+
+Assertion failed:
+
+assert Foo.class.groovydoc.content.contains('Some class groovydoc for Foo')
+                 |         |       |
+                 |         ''      false
+                 groovy.lang.groovydoc.Groovydoc$1@5c1bd44c (toString() == "")
+
+        at runtimeGroovyDoc.run(runtimeGroovyDoc.groovy:12)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+```
+
+```bash
+$ groovy -D groovy.attach.runtime.groovydoc=true runtimeGroovyDoc.groovy
+$ groovy -Dgroovy.attach.runtime.groovydoc=true runtimeGroovyDoc.groovy
+$ groovydoc -d runtimeDocOutput runtimeGroovyDoc.groovy
+$ open runtimeDocOutput/index-all.html
+$ open runtimeDocOutput/index.html
+```
+
+
