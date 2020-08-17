@@ -1,0 +1,1 @@
+assert 'ab' == 'a' + 'b'
